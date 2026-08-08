@@ -1,1 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>A Little Escape — For Faisal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --cream:#FFF8EA;
+    --paper:#FFFDF7;
+    --aqua:#A8DADC;
+    --sea:#457B9D;
+    --sand:#E9D8B4;
+    --olive:#7A8B6A;
+    --brown:#354044;
+    --white:#ffffff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--cream);
+    color:var(--brown);
+    overflow:hidden;
+}
+
+/* =========================
+   SCREENS
+========================= */
+
+.screen{
+    position:absolute;
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    padding:25px;
+
+    overflow:hidden;
+}
+
+.screen.active{
+    display:flex;
+    animation:show .9s ease;
+}
+
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   PAPER TEXTURE
+========================= */
+
+.paper-bg{
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(233,216,180,.35),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(168,218,220,.28),
+            transparent 28%
+        ),
+        var(--cream);
+}
+
+/* =========================
+   DECORATIONS
+========================= */
+
+.sun{
+    position:absolute;
+
+    width:110px;
+    height:110px;
+
+    border-radius:50%;
+
+    background:#F6C978;
+
+    top:9%;
+    right:12%;
+
+    opacity:.9;
+
+    box-shadow:
+        0 0 50px rgba(246,201,120,.3);
+}
+
+.cloud{
+    position:absolute;
+
+    width:120px;
+    height:35px;
+
+    background:rgba(255,255,255,.7);
+
+    border-radius:50px;
+
+    filter:blur(1px);
+}
+
+.cloud:before,
+.cloud:after{
+    content:"";
+
+    position:absolute;
+
+    background:inherit;
+
+    border-radius:50%;
+}
+
+.cloud:before{
+    width:55px;
+    height:55px;
+
+    left:20px;
+    bottom:5px;
+}
+
+.cloud:after{
+    width:45px;
+    height:45px;
+
+    right:18px;
+    bottom:5px;
+}
+
+.cloud.one{
+    top:18%;
+    left:8%;
+}
+
+.cloud.two{
+    top:32%;
+    right:8%;
+
+    transform:scale(.7);
+    opacity:.5;
+}
+
+.leaf{
+    position:absolute;
+
+    color:var(--olive);
+
+    font-size:42px;
+
+    opacity:.55;
+
+    transform:rotate(-20deg);
+}
+
+.leaf.one{
+    top:8%;
+    left:8%;
+}
+
+.leaf.two{
+    bottom:8%;
+    right:8%;
+
+    transform:rotate(160deg);
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+    position:relative;
+    z-index:5;
+
+    width:100%;
+    max-width:760px;
+
+    text-align:center;
+}
+
+.small-title{
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    color:var(--sea);
+
+    margin-bottom:20px;
+}
+
+h1,h2{
+    font-family:'Playfair Display',serif;
+
+    font-weight:500;
+}
+
+h1{
+    font-size:clamp(50px,9vw,92px);
+
+    line-height:1;
+
+    color:var(--brown);
+}
+
+h2{
+    font-size:clamp(35px,6vw,58px);
+
+    line-height:1.1;
+
+    margin-bottom:22px;
+}
+
+p{
+    font-size:16px;
+
+    line-height:1.8;
+
+    color:#59666A;
+}
+
+.hand{
+    font-family:'Caveat',cursive;
+
+    font-size:30px;
+
+    color:var(--sea);
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+button{
+    margin-top:30px;
+
+    padding:13px 25px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:var(--sea);
+
+    color:white;
+
+    font-family:'DM Sans',sans-serif;
+
+    font-size:12px;
+
+    letter-spacing:1.3px;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+    box-shadow:
+        0 8px 25px rgba(69,123,157,.2);
+}
+
+button:hover{
+    transform:translateY(-3px);
+
+    background:#376A88;
+
+    box-shadow:
+        0 12px 30px rgba(69,123,157,.3);
+}
+
+/* =========================
+   OPENING
+========================= */
+
+.opening-card{
+    background:rgba(255,253,247,.78);
+
+    padding:55px 35px;
+
+    max-width:650px;
+
+    margin:auto;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 20px 60px rgba(53,64,68,.08);
+
+    border:1px solid rgba(233,216,180,.7);
+}
+
+.line{
+    width:55px;
+    height:2px;
+
+    background:var(--sand);
+
+    margin:22px auto;
+}
+
+/* =========================
+   MEMORY SECTION
+========================= */
+
+.memory{
+    max-width:680px;
+
+    margin:auto;
+}
+
+.memory-text{
+    background:var(--paper);
+
+    padding:32px;
+
+    border-radius:5px;
+
+    box-shadow:
+        0 12px 40px rgba(53,64,68,.08);
+
+    transform:rotate(-1deg);
+
+    border:1px solid #EFE5D2;
+}
+
+.tape{
+    width:80px;
+    height:22px;
+
+    background:rgba(233,216,180,.65);
+
+    position:absolute;
+
+    top:-11px;
+    left:50%;
+
+    transform:translateX(-50%) rotate(2deg);
+}
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+    background:
+        linear-gradient(
+            rgba(69,123,157,.12),
+            rgba(255,248,234,.8)
+        ),
+        var(--cream);
+}
+
+.reveal-title{
+    font-size:clamp(55px,10vw,105px);
+
+    color:var(--sea);
+
+    letter-spacing:-3px;
+}
+
+.wave-line{
+    margin:22px auto;
+
+    width:130px;
+
+    height:18px;
+
+    border-bottom:2px solid var(--aqua);
+
+    border-radius:50%;
+}
+
+/* =========================
+   TRAVEL CARD
+========================= */
+
+.ticket{
+    width:100%;
+
+    max-width:650px;
+
+    margin:auto;
+
+    background:var(--paper);
+
+    border:1px solid #E5D7BD;
+
+    border-radius:8px;
+
+    padding:30px;
+
+    box-shadow:
+        0 20px 55px rgba(53,64,68,.1);
+
+    text-align:left;
+
+    position:relative;
+}
+
+.ticket:before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    top:50%;
+
+    border-top:1px dashed #D8C8A9;
+}
+
+.ticket-heading{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding-bottom:22px;
+
+    margin-bottom:25px;
+}
+
+.ticket-heading h3{
+    font-family:'Playfair Display',serif;
+
+    font-size:30px;
+
+    color:var(--sea);
+}
+
+.ticket-small{
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#889397;
+}
+
+.details{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:28px;
+
+    position:relative;
+}
+
+.label{
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    color:#8C9699;
+
+    margin-bottom:6px;
+}
+
+.value{
+    font-family:'Playfair Display',serif;
+
+    font-size:20px;
+
+    color:var(--brown);
+}
+
+.ticket-note{
+    margin-top:30px;
+
+    padding-top:25px;
+
+    text-align:center;
+
+    font-family:'Caveat',cursive;
+
+    font-size:25px;
+
+    color:var(--sea);
+}
+
+/* =========================
+   EXPENSE
+========================= */
+
+.simple-note{
+    max-width:600px;
+
+    margin:auto;
+
+    padding:40px;
+
+    background:rgba(255,253,247,.8);
+
+    border-radius:10px;
+
+    border:1px solid #E7DAC2;
+
+    box-shadow:
+        0 15px 45px rgba(53,64,68,.07);
+}
+
+.simple-note .big{
+    font-family:'Playfair Display',serif;
+
+    font-size:34px;
+
+    color:var(--sea);
+
+    margin:20px 0;
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.letter-screen{
+    background:
+        linear-gradient(
+            rgba(168,218,220,.16),
+            rgba(233,216,180,.2)
+        ),
+        var(--cream);
+}
+
+.letter{
+    width:100%;
+
+    max-width:720px;
+
+    max-height:88vh;
+
+    overflow-y:auto;
+
+    background:var(--paper);
+
+    padding:45px 38px;
+
+    border-radius:5px;
+
+    border:1px solid #E4D7BE;
+
+    box-shadow:
+        0 25px 70px rgba(53,64,68,.12);
+
+    text-align:left;
+
+    position:relative;
+
+    scrollbar-width:none;
+}
+
+.letter::-webkit-scrollbar{
+    display:none;
+}
+
+.letter:before{
+    content:"";
+
+    position:absolute;
+
+    inset:13px;
+
+    border:1px solid rgba(233,216,180,.8);
+
+    pointer-events:none;
+}
+
+.letter h2{
+    color:var(--sea);
+
+    font-size:42px;
+
+    margin-bottom:22px;
+}
+
+.letter p{
+    font-family:'Caveat',cursive;
+
+    font-size:22px;
+
+    line-height:1.55;
+
+    color:#566367;
+
+    margin:12px 0;
+}
+
+.letter .center{
+    text-align:center;
+
+    font-size:29px;
+
+    color:var(--sea);
+
+    margin:25px 0;
+}
+
+.signature{
+    text-align:right;
+
+    font-family:'Caveat',cursive;
+
+    font-size:34px;
+
+    color:var(--sea);
+
+    margin-top:25px;
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.final{
+    background:
+        linear-gradient(
+            180deg,
+            #D9F0F0 0%,
+            #F6E8CB 55%,
+            #FFF8EA 100%
+        );
+}
+
+.final h1{
+    color:var(--sea);
+
+    font-size:clamp(48px,8vw,80px);
+}
+
+.final .reply{
+    font-family:'Caveat',cursive;
+
+    font-size:33px;
+
+    color:var(--brown);
+
+    margin-top:25px;
+}
+
+.final-signature{
+    font-family:'Caveat',cursive;
+
+    font-size:34px;
+
+    color:var(--sea);
+
+    margin-top:20px;
+}
+
+/* =========================
+   FLOATING SHELLS
+========================= */
+
+.float{
+    position:fixed;
+
+    pointer-events:none;
+
+    z-index:100;
+
+    animation:floatUp 6s linear forwards;
+
+    opacity:.7;
+}
+
+@keyframes floatUp{
+
+    0%{
+        transform:translateY(20px) rotate(0);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:.7;
+    }
+
+    100%{
+        transform:translateY(-110vh) rotate(180deg);
+
+        opacity:0;
+    }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .sun{
+        width:75px;
+        height:75px;
+
+        right:8%;
+    }
+
+    .opening-card{
+        padding:42px 22px;
+    }
+
+    .memory-text{
+        padding:25px 20px;
+    }
+
+    .ticket{
+        padding:25px 18px;
+    }
+
+    .details{
+        gap:20px;
+    }
+
+    .value{
+        font-size:17px;
+    }
+
+    .letter{
+        padding:38px 25px;
+    }
+
+    .letter p{
+        font-size:20px;
+    }
+
+    .letter .center{
+        font-size:27px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================================
+     1. OPENING
+========================================= -->
+
+<section class="screen paper-bg active" id="screen1">
+
+    <div class="sun"></div>
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+
+    <div class="leaf one">❧</div>
+
+    <div class="content">
+
+        <div class="opening-card">
+
+            <div class="small-title">
+                A little invitation
+            </div>
+
+            <h1>
+                Faisal
+            </h1>
+
+            <div class="line"></div>
+
+            <p>
+                I have a little surprise for you...
+            </p>
+
+            <p class="hand" style="margin-top:12px;">
+                Something I've been wanting to tell you.
+            </p>
+
+            <button onclick="go(2)">
+                OPEN THE SURPRISE →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     2. OLD PLANS
+========================================= -->
+
+<section class="screen paper-bg" id="screen2">
+
+    <div class="leaf one">❧</div>
+    <div class="leaf two">❧</div>
+
+    <div class="content memory">
+
+        <div class="small-title">
+            Do you remember?
+        </div>
+
+        <div class="memory-text">
+
+            <div class="tape"></div>
+
+            <h2>
+                Our old plans...
+            </h2>
+
+            <p>
+                Since the beginning of our relationship,
+                you and I talked about going on long tours together.
+            </p>
+
+            <p style="margin-top:12px;">
+                We made so many plans about the places we'd visit,
+                the adventures we'd have,
+                and all the little memories we'd make someday.
+            </p>
+
+            <p class="hand" style="text-align:center;margin-top:18px;">
+                We always said... “Someday.”
+            </p>
+
+        </div>
+
+        <button onclick="go(3)">
+            MAYBE SOMEDAY IS NOW →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     3. DREAM → REVEAL
+========================================= -->
+
+<section class="screen reveal" id="screen3">
+
+    <div class="sun"></div>
+
+    <div class="cloud one"></div>
+
+    <div class="content">
+
+        <div class="small-title">
+            One of those dreams
+        </div>
+
+        <p>
+            Some plans get postponed.
+        </p>
+
+        <p>
+            Some dreams keep waiting.
+        </p>
+
+        <div class="wave-line"></div>
+
+        <p class="hand">
+            But maybe...
+        </p>
+
+        <h1 class="reveal-title">
+            one of ours
+        </h1>
+
+        <p class="hand">
+            is finally ready to happen.
+        </p>
+
+        <button onclick="go(4)">
+            FIND OUT WHERE →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     4. COXS BAZAR REVEAL
+========================================= -->
+
+<section class="screen reveal" id="screen4">
+
+    <div class="sun"></div>
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+
+    <div class="content">
+
+        <div class="small-title">
+            Your little escape
+        </div>
+
+        <h1 class="reveal-title">
+            Cox's Bazar
+        </h1>
+
+        <div class="wave-line"></div>
+
+        <p class="hand" style="font-size:34px;">
+            Pack your bags, Faisal. 🌊
+        </p>
+
+        <p style="margin-top:10px;">
+            We're going to the sea.
+        </p>
+
+        <button onclick="go(5)">
+            SEE THE PLAN →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     5. TRAVEL DETAILS
+========================================= -->
+
+<section class="screen paper-bg" id="screen5">
+
+    <div class="content">
+
+        <div class="small-title">
+            Our little travel plan
+        </div>
+
+        <div class="ticket">
+
+            <div class="ticket-heading">
+
+                <h3>
+                    Cox's Bazar
+                </h3>
+
+                <div class="ticket-small">
+                    BEACH ESCAPE
+                </div>
+
+            </div>
+
+            <div class="details">
+
+                <div>
+                    <div class="label">
+                        WITH
+                    </div>
+
+                    <div class="value">
+                        Nawreen
+                    </div>
+                </div>
+
+                <div>
+                    <div class="label">
+                        FOR
+                    </div>
+
+                    <div class="value">
+                        Faisal
+                    </div>
+                </div>
+
+                <div>
+                    <div class="label">
+                        DURATION
+                    </div>
+
+                    <div class="value">
+                        2 Nights • 2 Days
+                    </div>
+                </div>
+
+                <div>
+                    <div class="label">
+                        DATE
+                    </div>
+
+                    <div class="value">
+                        Whenever you're free
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ticket-note">
+                Sea • Sunset • Food • Memories
+            </div>
+
+        </div>
+
+        <button onclick="go(6)">
+            ONE MORE THING →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     6. MY TREAT
+========================================= -->
+
+<section class="screen paper-bg" id="screen6">
+
+    <div class="content">
+
+        <div class="small-title">
+            Don't worry about anything
+        </div>
+
+        <div class="simple-note">
+
+            <p class="hand" style="font-size:34px;">
+                Just bring yourself.
+            </p>
+
+            <div class="line"></div>
+
+            <p>
+                The whole trip will be my treat. 🤍
+            </p>
+
+            <p style="margin-top:14px;">
+                I just want you to come,
+                relax, enjoy the sea,
+                and make some beautiful memories with me.
+            </p>
+
+        </div>
+
+        <button onclick="go(7)">
+            READ MY NOTE →
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     7. HANDWRITTEN LETTER
+========================================= -->
+
+<section class="screen letter-screen" id="screen7">
+
+    <div class="letter">
+
+        <h2>
+            Dear Faisal,
+        </h2>
+
+        <p>
+            I wanted to make this little invitation
+            a little more special, because it's not
+            just about going somewhere.
+        </p>
+
+        <p>
+            Do you remember how, from the beginning
+            of our relationship, we used to talk about
+            travelling together?
+        </p>
+
+        <p>
+            We had so many plans, so many random ideas
+            about places we'd visit and adventures
+            we'd have.
+        </p>
+
+        <p>
+            I know life gets busy, plans change,
+            and sometimes the things we imagine
+            take longer than we expect.
+        </p>
+
+        <p>
+            But I still remember those conversations.
+        </p>
+
+        <p class="center">
+            And this time, I thought...
+        </p>
+
+        <p>
+            Instead of just talking about it again,
+            why don't we actually make one of those
+            plans happen?
+        </p>
+
+        <p>
+            I don't want anything complicated.
+            I just want a little escape from everything—
+            some peaceful time by the sea,
+            lots of laughter, good food,
+            sunsets, and a few beautiful memories
+            to keep.
+        </p>
+
+        <p>
+            So whenever you get some free time,
+            just tell me.
+        </p>
+
+        <p class="center">
+            We'll make the rest of the plan together. 🤍
+        </p>
+
+        <p>
+            There's no pressure.
+            I simply wanted to ask you in a way
+            that you'd remember.
+        </p>
+
+        <p class="center">
+            I'll be waiting for your reply. 💌
+        </p>
+
+        <p>
+            And hopefully, someday when we look back,
+            this little invitation will be one of
+            those memories that makes us smile.
+        </p>
+
+        <div class="signature">
+            — Nawreen 🩷
+        </div>
+
+        <div style="text-align:center;">
+            <button onclick="go(8)">
+                ONE LAST PAGE →
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     8. FINAL
+========================================= -->
+
+<section class="screen final" id="screen8">
+
+    <div class="sun"></div>
+
+    <div class="cloud one"></div>
+    <div class="cloud two"></div>
+
+    <div class="leaf one">❧</div>
+
+    <div class="content">
+
+        <div class="small-title">
+            Until then...
+        </div>
+
+        <h1>
+            Waiting for<br>
+            your reply.
+        </h1>
+
+        <div class="wave-line"></div>
+
+        <p class="reply">
+            Whenever you're free,
+            just let me know. 💌
+        </p>
+
+        <div class="final-signature">
+            — Nawreen
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function go(number){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(function(screen){
+
+            screen.classList.remove("active");
+
+        });
+
+    document
+        .getElementById("screen" + number)
+        .classList.add("active");
+
+    floatingShells();
+}
+
+
+/* =========================
+   FLOATING BEACH DETAILS
+========================= */
+
+function floatingShells(){
+
+    const items = [
+        "✦",
+        "✧",
+        "❋",
+        "·"
+    ];
+
+    for(let i=0;i<8;i++){
+
+        const item =
+            document.createElement("div");
+
+        item.className="float";
+
+        item.innerHTML =
+            items[
+                Math.floor(
+                    Math.random()*items.length
+                )
+            ];
+
+        item.style.left =
+            Math.random()*100 + "vw";
+
+        item.style.bottom="-20px";
+
+        item.style.fontSize =
+            (10 + Math.random()*14) + "px";
+
+        item.style.color =
+            Math.random()>.5
+            ? "#457B9D"
+            : "#7A8B6A";
+
+        item.style.animationDuration =
+            (5 + Math.random()*3) + "s";
+
+        document.body.appendChild(item);
+
+        setTimeout(function(){
+
+            item.remove();
+
+        },8000);
+    }
+}
+
+
+/* =========================
+   START
+========================= */
+
+setTimeout(function(){
+
+    floatingShells();
+
+},1000);
+
+</script>
+
+</body>
+</html>
